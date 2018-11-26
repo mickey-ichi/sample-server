@@ -24,6 +24,6 @@
 
 ## Example
 
-[Link](https://example-server-wqoagloykf.now.sh)
+[Link](https://example-server-jmwtliayoy.now.sh)
 
 

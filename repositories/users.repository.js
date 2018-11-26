@@ -13,6 +13,17 @@ class UsersRepository {
             });
         });
     }
+
+    findUser(email) {
+        return new Promise((resolve, reject) => {
+            this.db.findOne({ email: email }, (err, doc) => {
+                if(err) {
+                    reject(err);
+                }
+                resolve(doc);
+            });
+        });
+    }
 }
 
 module.exports = UsersRepository;

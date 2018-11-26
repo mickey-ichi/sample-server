@@ -12,13 +12,18 @@ router.get('/', function (req, res, next) {
 
 /* Register user */
 router.post('/', userValidate, async (req, res, next) => {
+    const foundUser = await req.usersRepository.findUser(req.body.email);
+    if (foundUser) {
+        res.status(400).json({
+            message: 'account existing',
+        });
+    }
     const user = await req.usersRepository.create(req.body);
     const token = jwt.sign({
         data: user,
-    }, 'secret', { expiresIn: '5h' });
-    res.status(201).json({
-        token: token
-    });
+    }, 'secret', {expiresIn: '5h'});
+
+    res.status(201).json({ token: token });
 });
 
 module.exports = router;

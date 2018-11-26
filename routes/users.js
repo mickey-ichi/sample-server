@@ -1,20 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 const userValidate = require('./user.validate');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.json({
-        mickey: 'huhu'
+        mickey: 'mickey'
     });
 });
 
 /* Register user */
 router.post('/', userValidate, async (req, res, next) => {
-    let user = await req.usersRepository.create(req.body);
-    console.log(user);
+    const user = await req.usersRepository.create(req.body);
+    const token = jwt.sign({
+        data: user,
+    }, 'secret', { expiresIn: '5h' });
     res.status(201).json({
-        mickey: 'heheh'
+        token: token
     });
 });
 

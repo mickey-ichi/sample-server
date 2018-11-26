@@ -4,7 +4,7 @@ const Datastore = require('nedb');
 class DbDataSource {
     constructor() {
         this.config = config;
-        this.db = new Datastore({ filename: config.file, autoload: true });
+        this.db = new Datastore({ autoload: true });
     }
 
     getConfig() {
